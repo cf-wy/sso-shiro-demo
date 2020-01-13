@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:charset="UTF-8">
+    <title th:http-equiv="Content-Type" content="text/html;charset=UTF-8">Title</title>
+</head>
+<body>
+主页面
+<p th:text="'欢迎:'+${username}"/>
+<a href="/demoList" title="demoList">demo列表</a>
+<a href="/demoDelete" title="demoDelete">demo删除按钮</a>
+</body>
+</html>

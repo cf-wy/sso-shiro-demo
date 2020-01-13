@@ -1,0 +1,25 @@
+server:
+  port: 9888
+spring:
+  application:
+    name: sso-client-demo
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: utf-8
+#单点
+sso:
+  client-host-url: http://192.168.30.121:9888
+  server-url-prefix: https://siiltxygii.login.aliyunidaas.com/enduser/api/application/cas_apereo/idaas-cn-mp91ghp0j02cas_apereo
+  validation-url-prefix: https://siiltxygii.login.aliyunidaas.com/public/api/application/cas_apereo/idaas-cn-mp91ghp0j02cas_apereo
+#权限
+api:
+  psId: JutKRhGCyL
+  url-prefix: https://siiltxygii.api.aliyunidaas.com
+  accessToken-url: /oauth/token
+  permissions-url: /api/bff/v1.2/developer/ps/user_role_permissions
+  authorization-appKey: 1be3a57adc61c7e7de5f8e19f63b350dZt3tuE9FXys
+  authorization-appSecret: Uhdp6CDI30Kq8IAvXviBVXOYaxw6vdKmAcIqQrOkEV
+
