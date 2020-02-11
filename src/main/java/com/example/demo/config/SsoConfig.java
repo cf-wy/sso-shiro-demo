@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 @Configuration
-public class OSSConfig {
+public class SsoConfig {
     /**
      * 单点登陆过滤器
      * @return

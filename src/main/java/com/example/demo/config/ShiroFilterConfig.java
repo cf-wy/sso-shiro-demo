@@ -22,12 +22,12 @@ import java.util.Map;
 public class ShiroFilterConfig {
 
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager,OSSConfigProperties ossConfigProperties) {
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager,SsoConfigProperties ssoConfigProperties) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl(ossConfigProperties.getServerUrlPrefix()+"/login?service="+ossConfigProperties.getClientHostUrl()+"/shiro-cas");
+        shiroFilterFactoryBean.setLoginUrl(ssoConfigProperties.getServerUrlPrefix()+"/login?service="+ssoConfigProperties.getClientHostUrl()+"/shiro-cas");
         // 登录成功后要跳转的连接
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
@@ -35,7 +35,7 @@ public class ShiroFilterConfig {
         Map<String, Filter> filters = new HashMap<>();
         CasFilter casFilter=new CasFilter();
         LogoutFilter logoutFilter=new LogoutFilter();
-        logoutFilter.setRedirectUrl(ossConfigProperties.getServerUrlPrefix()+"/logout?service="+ossConfigProperties.getClientHostUrl());
+        logoutFilter.setRedirectUrl(ssoConfigProperties.getServerUrlPrefix()+"/logout?service="+ssoConfigProperties.getClientHostUrl());
         //casFilter.setFailureUrl("/");
         filters.put("casFilter", casFilter);
         filters.put("logout",logoutFilter);
@@ -66,11 +66,11 @@ public class ShiroFilterConfig {
     }
 
     @Bean(name = "myShiroCasRealm")
-    public MyShiroCasRealm myShiroCasRealm(EhCacheManager cacheManager,OSSConfigProperties ossConfigProperties,ApiConfigProperties apiConfigProperties) {
+    public MyShiroCasRealm myShiroCasRealm(EhCacheManager cacheManager,SsoConfigProperties ssoConfigProperties,ApiConfigProperties apiConfigProperties) {
         MyShiroCasRealm realm = new MyShiroCasRealm();
         realm.setApiConfigProperties(apiConfigProperties);
-        realm.setCasService(ossConfigProperties.getClientHostUrl());
-        realm.setCasServerUrlPrefix(ossConfigProperties.getValidationUrlPrefix());
+        realm.setCasService(ssoConfigProperties.getClientHostUrl());
+        realm.setCasServerUrlPrefix(ssoConfigProperties.getValidationUrlPrefix());
         realm.setAuthorizationCacheName("authorizationCache");
         realm.setCacheManager(cacheManager);
         return realm;
